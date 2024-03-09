@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Registrasi</title>
+    <style>
+      fieldset {
+        margin-bottom: 20px;
+      }
+      textarea {
+        vertical-align: top;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Form Registrasi</h1>
+    <form action="" method="post">
+      <fieldset>
+        <legend>Biodata</legend>
+        <table>
+          <tr>
+            <td>Nama Mahasiswa</td>
+            <td>: <input name="nama" type="text" /></td>
+          </tr>
+          <tr>
+            <td>No Induk Mahasiswa (NIM)</td>
+            <td>: <input name="NIM" type="text" /></td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">Alamat Mahasiswa</td>
+            <td>: <textarea name="alamat" cols="30" rows="3"></textarea></td>
+          </tr>
+          <tr>
+            <td>Tanggal Lahir</td>
+            <td>: <input name="tanggal_lahir" type="date" /></td>
+          </tr>
+          <tr>
+            <td>Jenis Kelamin</td>
+            <td>
+              :
+              <input
+                name="jenis_kelamin"
+                type="radio"
+                value="L"
+                id="radio-pria"
+                checked
+              />
+              <label for="radio-pria">Pria</label>
+
+              <input
+                name="jenis_kelamin"
+                type="radio"
+                value="P"
+                id="radio-wanita"
+              />
+              <label for="radio-wanita">Wanita</label>
+            </td>
+          </tr>
+          <tr>
+            <td>Upload Foto</td>
+            <td>: <input name="foto" type="file" accept="image/png, image/jpg, image/jpeg"/></td>
+          </tr>
+          <tr>
+            <td>URL Website</td>
+            <td>
+              :
+              <input
+                name="url_web"
+                type="text"
+                placeholder="URL Website Anda"
+                size="28"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Perguruan Tinggi</td>
+            <td>: <input name="lulusan" type="text" /></td>
+          </tr>
+        </table>
+      </fieldset>
+      <fieldset>
+        <legend>Info Akun</legend>
+        <table>
+          <tr>
+            <td>Email</td>
+            <td>: <input type="email" placeholder="Email Anda" /></td>
+          </tr>
+          <tr>
+            <td>Username</td>
+            <td>: <input type="text" placeholder="Username Anda" /></td>
+          </tr>
+          <tr>
+            <td>Password</td>
+            <td>: <input type="text" placeholder="Password Anda" /></td>
+          </tr>
+          <tr>
+            <td>Ulangi Password</td>
+            <td>: <input type="text" placeholder="Password Anda" /></td>
+          </tr>
+        </table>
+      </fieldset>
+      <fieldset>
+        <legend>Kemampuan Dasar</legend>
+        <input type="checkbox" name="kemampuan" value="html" id="checkbox-html"/>
+        <label for="checkbox-html">HTML</label>
+
+        <input type="checkbox" name="kemampuan" value="css" id="checkbox-css"/>
+        <label for="checkbox-css">CSS</label>
+
+        <input type="checkbox" name="kemampuan" value="js" id="checkbox-js"/>
+        <label for="checkbox-js">Javascript</label>
+
+        <input type="checkbox" name="kemampuan" value="php" id="checkbox-php"/>
+        <label for="checkbox-php">PHP</label>
+
+        <input type="checkbox" name="kemampuan" value="mysql" id="checkbox-mysql"/>
+        <label for="checkbox-mysql">MySQL</label>
+
+        <input type="checkbox" name="kemampuan" value="laravel" id="checkbox-laravel"/>
+        <label for="checkbox-laravel">Laravel</label>
+
+        <input type="checkbox" name="kemampuan" value="react" id="checkbox-react"/>
+        <label for="checkbox-react">React Native</label>
+      </fieldset>
+
+<input type="reset"/>
+<input type="submit" value="Simpan"/>
+<input type="button" value="Button" onclick="alert('Button ditekan!');"/>
+    </form>
+  </body>
+</html>
