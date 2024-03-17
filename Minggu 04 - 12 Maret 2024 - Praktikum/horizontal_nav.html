@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Horizontal Nav</title>
+    <style>
+        * {
+            font-family: 'Arial';
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: .3s;
+        }
+        nav {
+            background-color: #efefef; /* putih keabuan */
+            display: inline-block;
+            margin: 5px;
+        }
+        ul {
+            list-style: none;
+            display: flex;
+        }
+        .active {
+            background: #43acab; /* hijau tosca */
+            color: white;
+        }
+        a {
+            display: inline-block;
+            padding: 15px 25px;
+            position: relative;
+            text-decoration: none;
+            font-size: 16px;
+            color: black;
+            text-transform: uppercase;
+        }
+        a::before {
+            content: "";
+            height: 4px;
+            background: #efefef; /* putih keabuan */
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+        a::after {
+            content: "";
+            height: 4px;
+            position: absolute;
+            left: 51%;
+            right: 51%;
+            bottom: 0;
+            transition: .3s;
+        }
+        a:hover, .active:hover {
+            background: #474747; /* abu-abu gelap */
+            color: white;
+        }
+        a:hover::after {
+            right: 0;
+            left: 0;
+            background: #43acab; /* hijau tosca */
+        }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="#" class="active">Home</a></li>
+        <li><a href="#">Service</a></li>
+        <li><a href="#">Project</a></li>
+        <li><a href="#">About</a></li>
+      </ul>
+    </nav>
+  </body>
+</html>

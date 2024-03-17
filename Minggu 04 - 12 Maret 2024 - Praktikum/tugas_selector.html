@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tugas Selector</title>
+  <style>
+    /* Implementasi Universal Selector */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    /* Implementasi Id Selector */
+    #container {
+      background: #282a35;
+      display: flex;
+      justify-content: center;
+      gap: 2%;
+      padding: 20px 0;
+    }
+    /* Implementasi Class Selector */
+    .item {
+      position: relative;
+      z-index: 1;
+    }
+    /* Implementasi Pseudo Element Selector */
+    .item::before {
+      content: "";
+      position: absolute;
+      padding: 10px;
+      background: linear-gradient(white, transparent);
+      top: -40%;
+      left: 1%;
+      right: 1%;
+      bottom: 0%;
+      clip-path: polygon(20% 0%, 80% 0%, 120% 100%, -20% 100%);
+      transition: 0s;
+      opacity: 0%;
+      filter: blur(5px);
+    }
+    .item::after {
+      content: "";
+      position: absolute;
+      padding: 2px;
+      background: radial-gradient(circle, rgb(255, 255, 255) 60%, rgba(255, 255, 255, 0%) 100%);
+      border-radius: 50%;
+      left: 0%;
+      right: 0%;
+      bottom: 0%;
+      z-index: -1;
+      transition: .3s ease;
+      opacity: 0%;
+    }
+    /* Implementasi Element Selector */
+    .item img {
+      width: 50px;
+      filter: invert(70%);
+      transition: transform .3s ease;
+    }
+    /* Implementasi Pseudo Class Selector */
+    .item:hover img{
+      transform: translateY(-10%);
+      filter: invert(100%);
+    }
+    .item:hover::after{
+      left: -20%;
+      right: -20%;
+      opacity: 30%;
+    }
+    .item:hover::before{
+      opacity: 100%;
+    }
+    /* Implementasi Attribute Selector */
+    a[href="#"] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <a href="https://www.instagram.com" class="item"><img src="assets/instagram.png" alt="instagram"></a>
+    <a href="#" class="item"><img src="assets/discord.png" alt="discord"></a>
+    <a href="https://id.linkedin.com" class="item"><img src="assets/linkedin.png" alt="linkedin"></a>
+    <a href="https://id.pinterest.com" class="item"><img src="assets/pinterest.png" alt="pinterest"></a>
+  </div>
+</body>
+</html>
