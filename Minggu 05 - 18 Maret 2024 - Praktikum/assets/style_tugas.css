@@ -1,0 +1,264 @@
+:root {
+  /* Variabel siap pakai */
+  --hilight-color: #a2a29b;
+  --light-color: #9a7299;
+  --main-color: #82477d;
+  --shade-color: #474148;
+  --dark-color: #272c39;
+  --btn-font-color: #c6c7c8;
+  --btn-font-color-hover: aliceblue;
+  --main-bg-color: #acb2b5;
+  --footer-bg-color: #a7a5a5;
+}
+
+* {
+  /* Mengatur semua elemen agar tidak membeber keluar ketika box modelling */
+  box-sizing: border-box;
+  /* Mengatur "jarak dalam" semua elemen menjadi 0 segala arah */
+  padding: 0;
+  /* Mengatur "jarak luar" semua elemen menjadi 0 segala arah */
+  margin: 0;
+  /* Mengatur font yang diterapkan semua elemen */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+  /* Mengubah format tampilan menjadi grid */
+  display: grid;
+  /* Grid dapat automatis menyesuaikan jumlah dan ukuran kolom*/
+  grid-template-columns: auto;
+  /* Grid dapat automatis menyesuaikan jumlah dan ukuran baris*/
+  grid-template-rows: auto;
+  /* Memetakan pembagian area untuk tampilan dekstop */
+  grid-template-areas: 
+    "sidebar main main main"
+    "sidebar main main main"
+    "sidebar footer footer footer"
+  ;
+}
+/* SIDEBAR - START */
+.sidebar {
+  /* Grid item bernama sidebar */
+  grid-area: sidebar;
+  /* Mengatur gradien linear sebagai background */
+  background: linear-gradient(var(--main-color), var(--main-color), var(--shade-color));
+}
+.sidebar nav {
+  /* Mendorong elemen nav "setengah tinggi parent" ke bawah */
+  margin-top: 50vh;
+  /* Menaikkan elemen nav "setengah elemen" ke atas */
+  transform: translateY(-50%);
+  
+}
+.sidebar li {
+  /* Menghilangkan style bawaan list item */
+  list-style: none;
+  /* Memposisikannya di tengah */
+  text-align: center;
+}
+.sidebar a {
+  /* Mengubah display block agar dapat positioning  */
+  display: block;
+  /* Mengilangkan style bawaan anchor */
+  text-decoration: none;
+  /* Mengubah warnanya menjadi putih keabuan */
+  color: var(--btn-font-color);
+  /* Mengubah ukuran font menjadi 35px */
+  font-size: 25px;
+  /* Mempertebal font */
+  font-weight: bold;
+  /* Memberi padding disemua sisi 1em (25px) */
+  padding: 1em;
+}
+.sidebar a:hover {
+  /* Mengubah warna font menjadi lebih cerah saat mouse over */
+  color: var(--btn-font-color-hover);
+}
+/* SIDEBAR - END */
+
+/* CONTENT - START */
+.content {
+  /* Grid item bernama main */
+  grid-area: main;
+  /* Mengatur warna background content */
+  background-color: var(--main-bg-color);
+}
+.content .hero {
+  /* Menjadikan .hero berformat tampilan flex */
+  display: flex;
+  /* Mengatur arah flex item menjadi horizontal terbalik */
+  flex-direction: row-reverse;
+}
+.content img {
+  /* Mengatur tinggi gambar 3.5 * 16px */
+  /* 16px adalah ukuran default font HTML */
+  /* satuan ukur em relatif terhadap ukuran font parent element atau default HTML */
+  height: 3.5em;
+  /* Mendorong gambar "setengah tinggi parent" ke bawah */
+  margin-top: 50vh;
+  /* Mendorong gambar "dua kali elemen" ke atas */
+  transform: translateY(-200%);
+  
+}
+.content .hero .hero-content {
+  /* Mengatur lebar elemen sepenuhnya */
+  width: 100%;
+  /* Memberi "jarak dalam" untuk sisi samping kanan dan kiri */
+  padding: 0 1em;
+  /* Mendorong elemen "setengah tinggi parent" ke bawah */
+  margin-top: 50vh;
+  /* Mendorong elemen "setengah elemen" ke atas */
+  transform: translateY(-50%);
+  /* Mengatur ukuran font sebesar 25px */
+  font-size: 25px;
+}
+.content .hero .hero-content h1 {
+  /* Mengatur ketebalan font h1 menjadi normal */
+  font-weight: normal;
+  /* Mengatur ukuran font h1 menjadi 3 * 25px */
+  font-size: 3em;
+  /* Mengatur warna font h1 menjadi abu gelap */
+  color: var(--dark-color);
+}
+.content .hero .hero-content h2 {
+  /* Mengatur ukuran font h2 menjadi 2 * 25px */
+  font-size: 2em;
+}
+.content .hero .hero-content p {
+  /* Paragraf random */
+  /* Mengatur lebar maksimum elemen p sebesar 760px */
+  /* Artinya elemen ini tidak bisa melebar melebihi 760px */
+  max-width: 760px;
+}
+.content .hero .hero-content a {
+  /* Tombol "Profil Saya" */
+  /* Mengubah format tampilan anchor menjadi inline-block */
+  display: inline-block;
+  /* Menghilankan style bawaan anchor */
+  text-decoration: none;
+  /* Mengubah warna font menjadi putih keabuan */
+  color: var(--btn-font-color);
+  /* Memepertebal font */
+  font-weight: bold;
+  /* Mengubah warna background menjadi gelap */
+  background: var(--dark-color);
+  /* Mengatur "jarak dalam" elemen, menyesuaikan contoh dlm modul */
+  padding: 4px 32px 8px 40px;
+  /* Mengatur radius sudut elemen sebesar 24px */
+  border-radius: 24px;
+  /* Mendorong elemen 25px ke bawah */
+  margin-top: 1em;
+}
+.content .hero .hero-content a:hover {
+  /* Mengubah warna font tombol "Profil Saya" saat mouse over */
+  color: var(--btn-font-color-hover);
+}
+/* CONTENT - END */
+
+/* FOOTER - START */
+.footer {
+  /* Grid item bernama footer */
+  grid-area: footer;
+  /* Mengatur posisi text ke tengah */
+  text-align: center;
+  /* Mengatur warna background footer */
+  background: var(--footer-bg-color);
+}
+.footer li {
+  /* Mengilangkan style bawaan list item */
+  list-style: none;
+  /* Mengatur format tampilan menjadi inline-block */
+  display: inline-block;
+  /* Mengatur "jarak dalam" elemen list item */
+  padding: 1em 0.5em;
+  /* Mengatur "jarak luar" elemen list item */
+  margin: 30px 2%;
+}
+.footer li a {
+  /* Menghilangkan style bawaan anchor */
+  text-decoration: none;
+  /* Mengubah warna font menjadi hitam */
+  color: black;
+  /* Mengatur ketebalan font sebesar 500 */
+  /* Nilai 700 sama tebalnya dengen BOLD*/
+  font-weight: 500;
+}
+/* FOOTER - END */
+
+/* BREAKPOINT TABLET */
+@media screen and (max-width: 768px){
+  /* 
+    Semua pengaturan CSS di blok ini akan dijalankan atau menimpa CSS yng sudah
+    ada saat ukuran layar perangkat memiliki lebar 768px atau lebih kecil.
+  */
+  .container {
+    /* Memetakan pembagian area untuk tampilan tablet */
+    grid-template-areas: 
+      "sidebar sidebar sidebar sidebar"
+      "main main main main"
+      "footer footer footer footer"
+    ;
+  }
+
+  /* SIDEBAR - START */
+  .sidebar {
+    /* Sidebar kini sudah diposisikan di atas, atau menjadi navbar */
+    /* Mengatur warna background sesuai contoh dalam modul*/
+    background: linear-gradient(to right, var(--hilight-color), var(--light-color), var(--main-color));
+  }
+  .sidebar nav {
+    /* Menghilangkan "jarak luar" elemen */
+    margin: 0;
+    /* Mereset pergeseran elemen terhadap sumbu Y ke 0 */
+    transform: translateY(0);
+    
+  }
+  .sidebar ul {
+    /* Memposisikan text ke tengah */
+    text-align: center;
+  }
+  .sidebar li {
+    /* Mengatur format tampilan menjadi inlie-block */
+    display: inline-block;
+    /* Mengatur "jarak luar" list item */
+    margin: 0 3%;
+  }
+  /* SIDEBAR - END */
+
+  /* CONTENT- START */
+  .content .hero {
+    /* Mengatur arah flex item menjadi vertikal */
+    flex-direction: column;
+    /* Memposisikan text ke tengah */
+    text-align: center;
+    /* Memposisikan flex item ke tengah */
+    align-items: center;
+  }
+  .content .hero img {
+    /* Mengatur lebar gambar menjadi 20 * 16px */
+    width: 20em;
+    /* Mengatur tinggi bawaan (dapat menyesuaikan dengan lebar jika diatur) */
+    height: initial;
+    /* Mendorong gambar 50px ke bawah */
+    margin-top: 50px;
+    /* Menggeser posisi "15% ukuran horizontal gambar" ke kanan*/
+    transform: translateX(15%);
+  }
+  .content .hero .hero-content {
+    /* Mendorong elemen 50px ke bawah */
+    margin-top: 50px;
+    /* Membari "jarak luar" 150px di bawah elemen */
+    margin-bottom: 150px;
+    /* Mereset pergeseran elemen terhadap sumbu Y ke 0 */
+    transform: translateY(0);
+  }
+  .content .hero .hero-content h1 {
+    /* Memngubah ukuran font h1 menjadi 2 * 25px */
+    font-size: 2em;
+  }
+  .content .hero .hero-content h2 {
+    /* Memngubah ukuran font h1 menjadi 1.8 * 25px */
+    font-size: 1.8em;
+  }
+  /* CONTENT- END */
+}
