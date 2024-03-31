@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .calculator {
+      /* 
+      Calculator sebagai penampung utama memenuhi layar, menempatkan 
+      display dan  button ditengan secara tertata menggunakan flex
+      */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+    }
+    #display {
+      box-sizing: border-box;
+      background-color: aliceblue;
+      /* Display diatur selebar 195px (Total lebar 4 tombol dan 3 gap) */
+      width: 195px;
+      height: 45px;
+      margin-bottom: 10px;
+      /* Display diatur radius bordernya sebesar 5px */
+      border-radius: 5px;
+      padding: 20px 10px;
+      font-size: 20px;
+    }
+    .buttons {
+      /* Menggunakan grid untuk membagi rata area setiap tombol */
+      display: grid;
+      /* 
+      Grid terbagi menjadi 4 kolom. Secara berulang, setiap kolom 
+      diatur sebesar 1 fraction (ruang yang tersedia dalam skala 1).
+      Artinya keempat kolom akan menyesuaikan dan mendapat luas area
+      sama skalanya.
+      */
+      grid-template-columns: repeat(4, 1fr);
+      /* Penambahan ajarak antar grid item sebesar 5px */
+      gap: 5px;
+    }
+    .button {
+      width: 45px;
+      height: 45px;
+      font-size: 20px;
+      /* Setiap button diatur radius bordernya sebesar 5px */
+      border-radius: 5px;
+      /* Tombol biasa dikelompokkan dalam warna 1 */
+      background-color: aquamarine;
+    }
+    .button:hover {
+      /* Button dibuat sedikit gelap ketika mouse over */
+      filter: brightness(90%);
+    }
+    .btn-number {
+      /* Tombol angka dikelompokkan dalam warna 2 */
+      background-color: ghostwhite;
+    }
+    .btn-operation {
+      /* Tombol operasi dikelompokkan dalam warna 3 */
+      background-color: turquoise;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" id="display" disabled>
+    <div class="buttons">
+      <button class="button btn-number" onclick="appendNumber('7')">7</button>
+      <button class="button btn-number" onclick="appendNumber('8')">8</button>
+      <button class="button btn-number" onclick="appendNumber('9')">9</button>
+      <button class="button btn-operation" onclick="chooseOperation('/')">/</button>
+      <button class="button btn-number" onclick="appendNumber('4')">4</button>
+      <button class="button btn-number" onclick="appendNumber('5')">5</button>
+      <button class="button btn-number" onclick="appendNumber('6')">6</button>
+      <button class="button btn-operation" onclick="chooseOperation('*')">*</button>
+      <button class="button btn-number" onclick="appendNumber('1')">1</button>
+      <button class="button btn-number" onclick="appendNumber('2')">2</button>
+      <button class="button btn-number" onclick="appendNumber('3')">3</button>
+      <button class="button btn-operation" onclick="chooseOperation('-')">-</button>
+      <button class="button" onclick="clearDisplay()">C</button>
+      <button class="button btn-number" onclick="appendNumber('0')">0</button>
+      <button class="button" onclick="calculate()">=</button>
+      <button class="button btn-operation" onclick="chooseOperation('+')">+</button>
+    </div>
+  </div>
+
+  <script>
+    /* 
+    Mendapatkan elemen dengan id 'display' dan menyimpan 
+    referensinya dalam variabel display
+    */
+    let display = document.getElementById('display');
+    // Variabel untuk menyimpan operasi terkini/terbaru
+    let currentOperation = null;
+    // Variabel untuk menyimpan operan terkini/terbaru
+    let currentOperand = '';
+    // Variabel untuk menyimpan operan lama
+    let previousOperand = '';
+
+    // Fungsi untuk memperbarui display sesuai inputan angka
+    function appendNumber(number) {
+      // Menempelkan angka inputan ke operan saat ini (String)
+      currentOperand = currentOperand.toString() + number.toString();
+      // Memperbarui display
+      display.value = currentOperand;
+    }
+
+    // Fungsi untuk mereset variabel dan membersihkan display
+    function clearDisplay() {
+      currentOperand = '';
+      previousOperand = '';
+      currentOperation = null;
+      display.value = '';
+    }
+
+    // Fungsi untuk memilih operasi yang hendak dilakukan
+    function chooseOperation(operation) {
+      /* 
+      Jika operan terbaru kosong, maka simpan operasi 
+      yang dipilih dan kembali.
+      */
+      if (currentOperand === '') {
+        currentOperation = operation;
+        return;
+      }
+      /*
+      Jika operan sebelumnya tidak kosong, 
+      maka hitung operan sebelumnya dengan yg terbaru
+      */
+      if (previousOperand !== '') {
+        calculate();
+      }
+      // Simpan operasi yang dipilih pengguna
+      currentOperation = operation;
+      // Jadikan operan terkini menjadi operan lama
+      previousOperand = currentOperand;
+      // Bersihkan operan terkini/terbaru
+      currentOperand = '';
+    }
+
+    // Fungsi untuk melakukan perhitungan terhadap operan lama dan baru
+    function calculate() {
+      // Variabel penampung jawaban
+      let result;
+      // Ubah operan lama (string) menjadi float
+      const prev = parseFloat(previousOperand);
+      // Ubah operan terkini/baru (string) menjadi float
+      const current = parseFloat(currentOperand);
+      /*
+      Jika salah satu saja dari operan bukan merupakan angka,
+      maka kembali
+      */ 
+      if (isNaN(prev) || isNaN(current)) return;
+      // Hitung operan berdasarkan operasi yang sudah ditentukan
+      switch (currentOperation) {
+        case '+':
+          result = prev + current;
+          break;
+        case '-':
+          result = prev - current;
+          break;
+        case '*':
+          result = prev * current;
+          break;
+        case '/':
+          result = prev / current;
+          break;
+        default:
+          return;
+      }
+      // Simpan jawaban ke operan terkini/terbaru
+      currentOperand = result;
+      // Reset operasi terkini dan operan sebelumnya
+      currentOperation = null;
+      previousOperand = '';
+      // Tampilkan jawaban (operan terkini/terbaru)
+      display.value = currentOperand;
+    }
+  </script>
+</body>
+</html>
