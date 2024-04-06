@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Form Validation</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+    h1 {
+      padding-left: 10px;
+      font-size: 2.57em;
+    }
+    input:not([type="radio"]) {
+      width: 100%;
+    }
+    input[type="submit"] {
+      margin-top: 30px;
+    }
+    td {
+      padding: 2px 10px;
+    }
+    span {
+      margin-left: 0;
+    }
+    .error {
+      color: red;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>REGISTRATION</h1>
+
+  <form id="main-form" name="main-form" method="" action="">
+    <table>
+      <tr>
+        <td>Fullname</td>
+        <td><input type="text" name="fullname" id="fullname" /></td>
+        <td><span id="err-msg-fullname" class="error"></span></td>
+      </tr>
+      <tr>
+        <td>Username</td>
+        <td><input type="text" name="username" id="username" /></td>
+        <td><span id="err-msg-username" class="error"></span></td>
+      </tr>
+      <tr>
+        <td>Email</td>
+        <td><input type="text" name="email" id="email" /></td>
+        <td><span id="err-msg-email" class="error"></span></td>
+      </tr>
+      <tr>
+        <td>Password</td>
+        <td><input type="password" name="password" id="password" /></td>
+        <td><span id="err-msg-password" class="error"></span></td>
+      </tr>
+      <tr>
+        <td>Confirm Password</td>
+        <td><input type="password" name="repassword" id="repassword" /></td>
+        <td><span id="err-msg-repassword" class="error"></span></td>
+      </tr>
+      <tr>
+        <td>Phone</td>
+        <td><input type="text" name="phone" id="phone" /></td>
+        <td><span id="err-msg-phone" class="error"></span></td>
+      </tr>
+      <tr>
+        <td>Gender</td>
+        <td>
+          <input type="radio" name="gender" id="gender-lanang"/>
+          <label for="gender-lanang">Male</label>
+          <input type="radio" name="gender" id="gender-wadon"/>
+          <label for="gender-wadon">Female</label>
+        </td>
+        <td><span id="err-msg-gender" class="error"></span></td>
+      </tr>
+      <tr>
+        <td>Web URL</td>
+        <td><input type="text" name="webbio" id="webbio" /></td>
+        <td><span id="err-msg-webbio" class="error"></span></td>
+      </tr>
+      <tr>
+        <td colspan="2"><input type="submit" name="submit" id="submit" value="Kirim"/></td>
+      </tr>
+    </table>
+  </form>
+
+  <script>
+    // Mendapatkan elemen kolom input form berdasrkan id
+    let mainForm        = document.getElementById("main-form");
+    let inputFullname   = document.getElementById("fullname");
+    let inputUsername   = document.getElementById("username");
+    let inputEmail      = document.getElementById("email");
+    let inputPassword   = document.getElementById("password");
+    let inputRePassword = document.getElementById("repassword");
+    let inputPhone      = document.getElementById("phone");
+    let inputGenderM    = document.getElementById("gender-lanang");
+    let inputGenderF    = document.getElementById("gender-wadon");
+    let inputWebURL     = document.getElementById("webbio");
+
+    // Mendapatkan elemen penampung peringatan validasi berdsarkan id
+    let errNoteFullname   = document.getElementById("err-msg-fullname");
+    let errNoteUsername   = document.getElementById("err-msg-username");
+    let errNoteEmail      = document.getElementById("err-msg-email");
+    let errNotePassword   = document.getElementById("err-msg-password");
+    let errNoteRePassword = document.getElementById("err-msg-repassword");
+    let errNotePhone      = document.getElementById("err-msg-phone");
+    let errNoteGender     = document.getElementById("err-msg-gender");
+    let errNoteWebURL     = document.getElementById("err-msg-webbio");
+
+    // Penggayaan untuk border kolom inputan yang tidak lolos validasi
+    let errorBorderStyle  = "2px solid red";
+
+    // Fungsi untuk memeriksa validasi form di atas
+    const cekValidasi = (e) => {
+      // Validasi Fullname
+      let errMsgFullname = "";
+      if (inputFullname.value.replaceAll(' ', '') == "") {
+        // Jika nilai (tanpa spasi) kosong
+        errMsgFullname = "*Nama lengkap harus diisi";
+      } else if (/\W/.test(inputFullname.value.replaceAll(' ', ''))) {
+        // Digunakan Regular Expression (/\W/) untuk mengidentifikasi alphabet
+        errMsgFullname = "*Hanya menerima karakter Alphabet";
+      } else if (inputFullname.value.replaceAll(' ', '').length < 3) {
+        // Jika nilai (tanpa spasi) kurang dari 3 karakter
+        errMsgFullname = "*Nama lengkap minimal 3 karakter";
+      }
+      // Jika Fullname tidakk lolos validasi di atas
+      if (errMsgFullname != "") {
+        // Isikan pesan perinagatan ke penampung peringatan Fullname
+        errNoteFullname.innerHTML = errMsgFullname;
+        // Ubah warna border elemen kolom input Fullname
+        inputFullname.style.border = errorBorderStyle;
+        // Pada kasus ini, berguna untuk menghentikan submit form
+        e.preventDefault(); 
+      }
+
+      // Validasi Username
+      let errMsgUsername = "";
+      if (inputUsername.value.replaceAll(' ', '') == "") {
+        // Jika nilai (tanpa spasi) kosong
+        errMsgUsername = "*Username harus diisi";
+      } else if (/\W/.test(inputUsername.value.replaceAll(' ', ''))) {
+        // Digunakan Regular Expression (/\W/) untuk mengidentifikasi alphabet
+        errMsgUsername = "*Hanya menerima karakter Alphabet";
+      } else if (inputUsername.value.replaceAll(' ', '').length < 3) {
+        // Jika nilai (tanpa spasi) kurang dari 3 karakter
+        errMsgUsername = "*Username minimal 3 karakter";
+      }
+      // Jika Usernama tidakk lolos validasi di atas
+      if (errMsgUsername != "") {
+        errNoteUsername.innerHTML = errMsgUsername;
+        inputUsername.style.border = errorBorderStyle;
+        // Pada kasus ini, berguna untuk menghentikan submit form
+        e.preventDefault(); 
+      }
+
+      // Validasi Email
+      let errMsgEmail = "";
+      if (inputEmail.value.replaceAll(' ', '') == "") {
+        errMsgEmail = "*Email harus diisi";
+      } else if (!inputEmail.value.includes("@")) {
+        // Jika email tidak memuat simbol '@'
+        errMsgEmail = "*Email tidak valid";
+      }
+      // Jika Email tidakk lolos validasi di atas
+      if (errMsgEmail != "") {
+        errNoteEmail.innerHTML = errMsgEmail;
+        inputEmail.style.border = errorBorderStyle;
+        // Pada kasus ini, berguna untuk menghentikan submit form
+        e.preventDefault(); 
+      }
+
+      // Validasi Password
+      let errMsgPassword = "";
+      if (inputPassword.value.replaceAll(' ', '') == "") {
+        errMsgPassword = "*Password harus diisi";
+      } else if (inputPassword.value.replaceAll(' ', '').length < 8) {
+        errMsgPassword = "*Password minimal 8 karakter";
+      }
+      // Jika Password tidakk lolos validasi di atas
+      if (errMsgPassword != "") {
+        errNotePassword.innerHTML = errMsgPassword;
+        inputPassword.style.border = errorBorderStyle;
+        // Pada kasus ini, berguna untuk menghentikan submit form
+        e.preventDefault(); 
+      }
+
+      // Validasi Konfirmasi Password
+      let errMsgRePassword = "";
+      if (inputRePassword.value.replaceAll(' ', '') == "") {
+        errMsgRePassword = "*Isi kembali untuk konfirmasi password";
+      } else if (inputRePassword.value.replaceAll(' ', '').length < 8) {
+        errMsgRePassword = "*Password minimal 8 karakter";
+      } else if (inputPassword.value.replaceAll(' ', '') == "") {
+        // Jika password awal belum diisi
+        errMsgRePassword = "*Password belum diisi";
+      } else if (inputRePassword.value != inputPassword.value) {
+        // Jika konfirmasi password tidak sama dengan password
+        errMsgRePassword = "*Konfirmasi password tidak sama";
+      }
+      // Jika Konfirmasi Password tidakk lolos validasi di atas
+      if (errMsgRePassword != "") {
+        errNoteRePassword.innerHTML = errMsgRePassword;
+        inputRePassword.style.border = errorBorderStyle;
+        // Pada kasus ini, berguna untuk menghentikan submit form
+        e.preventDefault(); 
+      }
+
+      // Validasi Gender
+      let errMsgGender = "";
+      if (!inputGenderM.checked && !inputGenderF.checked) {
+        // Jika tidak ada gender yang dipilih
+        errMsgGender = "*Gender wajib dipilih (salah satu)";
+      }
+      // Jika Gender tidakk lolos validasi di atas
+      if (errMsgGender != "") {
+        errNoteGender.innerHTML = errMsgGender;
+        // Pada kasus ini, berguna untuk menghentikan submit form
+        e.preventDefault(); 
+      }
+
+      // Validasi Phone
+      let errMsgPhone = "";
+      if (inputPhone.value == "") {
+        errMsgPhone = "*Nomor telepon harus diisi";
+      } else if (isNaN(inputPhone.value)) {
+        // Jika inputan bukan angka
+        errMsgPhone = "*Nomor telepon hanya berupa angka";
+      }
+      // Jika Nomor Telepon tidakk lolos validasi di atas
+      if (errMsgPhone != "") {
+        errNotePhone.innerHTML = errMsgPhone;
+        inputPhone.style.border = errorBorderStyle;
+        // Pada kasus ini, berguna untuk menghentikan submit form
+        e.preventDefault(); 
+      }
+
+      // Validasi WebURL
+      let errMsgWebURL = "";
+      let urlWeb = inputWebURL.value.replaceAll(' ', '');
+      // Untuk kondisi url memiliki protokol transfer
+      let hasProtocol = urlWeb.startsWith('http://') || urlWeb.startsWith('https://');
+      // Untuk kondisi url mengandung titik
+      let hasDot = urlWeb.includes('.');
+      // Mendapatkan index dari karakter titik terakhir dalam url
+      let lastDotPos = urlWeb.lastIndexOf('.');
+      // Untuk kondisi url mengandung domain
+      let hasDomain = lastDotPos > 0 && urlWeb.length - lastDotPos > 2;  
+      if (inputWebURL.value.replaceAll(' ', '') == "") {
+        errMsgWebURL = "*URL wajib diisi";
+      }
+      // Jika urlWeb tidak memenuhi format url web berdomain
+      else if (!hasProtocol || !hasDot || !hasDomain) {
+        errMsgWebURL = "*URL tidak valid";
+      }
+      // Jika Web URL tidakk lolos validasi di atas
+      if (errMsgWebURL != "") {
+        errNoteWebURL.innerHTML = errMsgWebURL;
+        inputWebURL.style.border = errorBorderStyle;
+        // Pada kasus ini, berguna untuk menghentikan submit form
+        e.preventDefault(); 
+      }
+
+    };
+    // Fungsi untuk mengilangkan border error dan peringatan
+    const hapusError = (e) => {
+      e.target.style.border = "";
+      e.target.parentElement.nextElementSibling.lastElementChild.innerHTML = "";
+    };
+
+    // Ketika kolom pengisian difokuskan, maka segala komponen peringatan error dihilangkan
+    inputFullname.addEventListener("focus", hapusError);
+    inputUsername.addEventListener("focus", hapusError);
+    inputEmail.addEventListener("focus", hapusError);
+    inputPassword.addEventListener("focus", hapusError);
+    inputRePassword.addEventListener("focus", hapusError);
+    inputPhone.addEventListener("focus", hapusError);
+    inputGenderM.addEventListener("focus", hapusError);
+    inputGenderF.addEventListener("focus", hapusError);
+    inputWebURL.addEventListener("focus", hapusError);
+
+    // Menjalankan validasi (cekValidasi) ketika form registrasi di submit
+    mainForm.addEventListener("submit", cekValidasi);
+  </script>
+</body>
+
+</html>
